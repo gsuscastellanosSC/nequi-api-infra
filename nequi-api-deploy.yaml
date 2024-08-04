@@ -1,0 +1,31 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  FranquiciasTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties: 
+      TableName: 'Franquicias'
+      AttributeDefinitions: 
+        - 
+          AttributeName: 'PK'
+          AttributeType: 'S'
+        - 
+          AttributeName: 'SK'
+          AttributeType: 'S'
+      KeySchema: 
+        - 
+          AttributeName: 'PK'
+          KeyType: 'HASH'
+        - 
+          AttributeName: 'SK'
+          KeyType: 'RANGE'
+      BillingMode: PAY_PER_REQUEST
+
+      GlobalSecondaryIndexes:
+        - IndexName: 'GSI1'
+          KeySchema:
+            - AttributeName: 'SK'
+              KeyType: 'HASH'
+            - AttributeName: 'PK'
+              KeyType: 'RANGE'
+          Projection:
+            ProjectionType: 'ALL'
